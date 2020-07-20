@@ -2,26 +2,26 @@
 
 ### Workflow
 
-Create a `main.js` file and work ENTIRELY in there. As you change the CSV file, feel free to change it back manually. Making a backup copy (or just re-downloading it from GitHub) may be a good idea.
+Create a `main.js` file and work ENTIRELY in there. As your code changes the CSV file, feel free to change it back manually with VS Code. Making a backup copy (or just re-downloading it from GitHub) may be a good idea.
 
 
 ### Steps
 
 ##### Familiarize Yourself With the CSV File
 
-Just see its general shape, which is simple: two values, the text of our todo, and the "completeness", represented by the string `complete` or the string `uncomplete`. (There's no header with this CSV simply for ease of coding a solution so you don't have to skip the first row, but it probably would in the real world.)
+There's no header with this CSV simply for ease of coding a solution (having to skip the first row is an annoyance we don't need right now), but the file would probably have one in the real world. So not having a header, let's check out its general shape, which is nice and simple. Each row has two values: the text of our todo, and its "completeness", represented by the string `complete` or the string `uncomplete`. That's it. Let's get to `main.js` and our code!
 
 
 ##### Loading and Displaying Our Todos
 
 * The first thing we'll need is the `fs` module. `require` it in.
-* Now we'll need an array to hold our todos in once we've loaded them from the `csv` file. Note that we're putting this in the global space, which is fine for a small app but would turn into quite a headache in a larger one. Fortunately, you'll be learning better "state management" later on!
-* Let's load them in from the file. Create a function, maybe called `loadTodos`. Let's start out by using the `fs` method `readFileSync`, passing it the path to our `csv` file and the obligatory string `utf8`. Save the return value, a big ol' newline- and comma-separated string into a variable.
+* Now we'll need an array to hold our todos in once we've loaded them from the CSV file. Note that we're putting this in the global space, which is fine for a small app but would turn into quite a headache in a larger one. Fortunately, you'll be learning better "state management" later on!
+* Let's load the todos in from our CSV. Create a function, maybe called `loadTodos`. Let's start out by using the `fs` method `readFileSync`, passing it the path to our `csv` file and the obligatory string `utf8`. Save the return value, a big ol' newline- and comma-separated string into a variable. Feel free to log it to see what you've got!
 * Now split it on the newlines to get yourself an array of comma-separated row strings.
-* Loop through those strings, splitting each on the comma. You'll note that there are two values in the resulting little array: the text and the completeness. Feel free to log to see what you've got!
-* Now push that little array into our arrays.
-* We can check if this works simply by calling the function below its definition and then console.logging our todos array. Run `node main.js` and see what you get! (You should get a multi-dimensional array with little todo item sub-arrays that perfectly mirror the `csv` file. That's what you should get.)
-* But, of course, we don't want to just log an array for our users, so let's write another function, maybe imaginatively called `displayTodos`. It should loop through each todo in our list and log it. Building a nicely-formatted string would be nice here; maybe a ` - ` string in between the todo and its completeness, and an emoji to represent that completeness? Here are two you can use: ✅ and ✖. YOU'RE WELCOME.
+* Loop through those strings, splitting each on the comma. You'll note that there are two values in the resulting little array: the text and the completeness. Feel free to log the sub-array to see what you've got!
+* Now push that little array into our todos array.
+* We can check if this works simply by calling the function below its definition and then console.logging our todos array. Run `node main.js` and see what you get! (You should get a multi-dimensional array with little todo item sub-arrays that perfectly mirror the CSV file. That's what you should get.)
+* But, of course, we don't want to just log an array for our users, so let's write another function, maybe imaginatively called `displayTodos`. It should loop through each todo in our list and log it out to the terminal. Building a nicely-formatted string would be nice here; maybe a ` - ` string in between the todo and its completeness, and an emoji to represent that completeness? Here are two you can use: ✅ and ✖. YOU'RE WELCOME.
 * Okay, now let's check these functions out. Call `loadTodos` and then `displayTodos`, then run the whole thing with `node main.js`. You should get a nice little list!
 
 
