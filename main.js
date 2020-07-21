@@ -10,12 +10,16 @@ const loadToDo = function(str){
 }
 const displayToDo = function(arr){
     let display = '';
+    const newArr = [];
     for(const subArr of arr){
-        if(subArr[1]==='complete'){subArr[1]='✅'}
-        if(subArr[1]==='uncomplete'){subArr[1]='✖'}
+        newArr.push(subArr)
+    }
+    for(const subAr of newArr){
+        if(subAr[1]==='complete'){subAr[1]='✅'}
+        if(subAr[1]==='uncomplete'){subAr[1]='✖'}
     }
     for(let i = 0; i< arr.length; i++){
-        const task = arr[i].join(' - ')
+        const task = newArr[i].join(' - ')
         display += (`${i+1}. ${task} \n`)
     }
     return display;
