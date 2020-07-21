@@ -40,7 +40,7 @@ const saveToDo = function(arr){
     let newData = '';
     const newArr =[];
     for(const subArr of arr){
-        subTodo = subArr.join(',')
+        let subTodo = subArr.join(',')
         newArr.push(subTodo);
     }
     newData = newArr.join('\n');
