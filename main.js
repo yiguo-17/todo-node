@@ -38,10 +38,12 @@ Your options are:
 `;
 const saveToDo = function(arr){
     let newData = '';
+    const newArr =[];
     for(const subArr of arr){
         subTodo = subArr.join(',')
-        newData += subTodo +'\n'
+        newArr.push(subTodo);
     }
+    newData = newArr.join('\n');
     fs.writeFileSync('./todos.csv',newData);
     console.log('Quitting!');
     interface.close();
