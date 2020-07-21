@@ -17,7 +17,7 @@ const displayToDo = function(arr){
     return display;
 }
 let tasks = loadToDo(list);
-let currentList = displayToDo(tasks);
+let original = displayToDo(tasks);
 const readline = require('readline');
 const { toUnicode } = require('punycode');
 const interface = readline.createInterface({input: process.stdin, output: process.stdout});
@@ -37,26 +37,41 @@ const removeOne = `Which task need to be removed?`
 const finish = `Congratulation, Which task has been done?`
 const unfinished = `Which task still needs more effort?`
 const add = function(arr){
+    arr.concat(process.argv.slice(2));
     const newTask = [];
-    str = arr.join(' ');
-    newTask.push(str);
+    newTask.push(arr);
     newTask.push('uncomplete');
-    tasks.push(newTask)
+    tasks.push(newTask);
+    let currentList = displayToDo(tasks);
+    console.log(currentList);
+    return tasks;
+
 }
 const remove = function(str){
-    tasks.splice(Number(str)-1,1)
+    tasks.splice(Number(str)-1,1);
+    let currentList = displayToDo(tasks);
+    console.log(currentList);
+    return tasks;
 }
 const complete = function(str){
-    tasks[Number(str)-1][1].push('complete');
+    let num = Number(str);
+    tasks[num-1][1] = 'complete';
+    let currentList = displayToDo(tasks);
+    console.log(currentList);
+    return tasks;
 }
 const uncomplete = function(str){
-    tasks[Number(str)-1][1]='uncomplete';
+    let num = Number(str);
+    tasks[num-1][1] = 'uncomplete';
+    let currentList = displayToDo(tasks);
+    console.log(currentList);
+    return tasks;
 }
 const handleMenu = function(str){
-    if(str === '1'){interface.question(newOne,add(process.argv.slice(2)))}
-    else if(str ==='2'){interface.question(removeOne,remove(process.argv[2]))}
-    else if(str ==='3'){interface.question(finish,complete(process.argv[2]))}
-    else if(str ==='4'){interface.question(unfinished,uncomplete(process.argv[2]))}
+    if(str === '1'){interface.question(newOne,add)}
+    else if(str ==='2'){interface.question(original + removeOne,remove)}
+    else if(str ==='3'){interface.question(original + finish,complete)}
+    else if(str ==='4'){interface.question(original + unfinished,uncomplete)}
     else {console.log('Quitting!');
     interface.close();}
 }
