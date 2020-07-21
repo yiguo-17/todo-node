@@ -32,6 +32,16 @@ Your options are:
 5. Quit.
 
 `;
+const saveToDo = function(arr){
+    let newData = '';
+    for(const subArr of arr){
+        subTodo = subArr.join(',')
+        newData += subTodo +'\n'
+    }
+    fs.writeFileSync('./todos.csv',newData);
+    console.log('Quitting!');
+    interface.close();
+}
 const newOne = `What's your new task?`;
 const removeOne = `Which task need to be removed?`
 const finish = `Congratulation, Which task has been done?`
@@ -44,6 +54,7 @@ const add = function(arr){
     tasks.push(newTask);
     let currentList = displayToDo(tasks);
     console.log(currentList);
+    saveToDo(tasks);
     return tasks;
 
 }
@@ -51,6 +62,7 @@ const remove = function(str){
     tasks.splice(Number(str)-1,1);
     let currentList = displayToDo(tasks);
     console.log(currentList);
+    saveToDo(tasks);
     return tasks;
 }
 const complete = function(str){
@@ -58,6 +70,7 @@ const complete = function(str){
     tasks[num-1][1] = 'complete';
     let currentList = displayToDo(tasks);
     console.log(currentList);
+    saveToDo(tasks);
     return tasks;
 }
 const uncomplete = function(str){
@@ -65,6 +78,7 @@ const uncomplete = function(str){
     tasks[num-1][1] = 'uncomplete';
     let currentList = displayToDo(tasks);
     console.log(currentList);
+    saveToDo(tasks);
     return tasks;
 }
 const handleMenu = function(str){
@@ -75,13 +89,9 @@ const handleMenu = function(str){
     else {console.log('Quitting!');
     interface.close();}
 }
-const saveToDo = function(arr){
-    const newArr = '';
-    for(const subArr of Arr){
-        subTodo = subArr.join(',')
-        newArr += subTodo +'\n'
-    }
-}
+
+
 interface.question(menu,handleMenu);
+
 
 
