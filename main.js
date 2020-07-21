@@ -56,9 +56,9 @@ const newOne = `What's your new task?`;
 const removeOne = `Which task need to be removed?`
 const finish = `Congratulation, Which task has been done?`
 const unfinished = `Which task still needs more effort?`
-const add = function(arr){
+const add = function(str){
     const newTask = [];
-    newTask.push(arr);
+    newTask.push(str);
     newTask.push('uncomplete');
     tasks.push(newTask);
     let currentList = displayToDo(tasks);
