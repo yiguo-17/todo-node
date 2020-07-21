@@ -10,6 +10,10 @@ const loadToDo = function(str){
 }
 const displayToDo = function(arr){
     let display = '';
+    for(const subArr of arr){
+        if(subArr[1]==='complete'){subArr[1]='✅'}
+        if(subArr[1]==='uncomplete'){subArr[1]='✖'}
+    }
     for(let i = 0; i< arr.length; i++){
         const task = arr[i].join(' - ')
         display += (`${i+1}. ${task} \n`)
