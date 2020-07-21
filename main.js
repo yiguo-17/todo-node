@@ -1,15 +1,26 @@
 const fs = require('fs');
 const list = fs.readFileSync('./todos.csv',{encoding:'utf-8'});
-const tasks = [];
-const lines = list.split('\n');
-for (const line of lines){
-    tasks.push(line.split(','));
+const loadToDo = function(str){
+    const tasks = [];
+    const lines = str.split('\n');
+    for (const line of lines){
+        tasks.push(line.split(','));
+    }
+    return tasks;
 }
+const displayToDo = function(arr){
+    let display = '';
+    for(let i = 0; i< arr.length; i++){
+        const task = arr[i].join(' - ')
+        display += (`${i+1}. ${task} \n`)
+    }
+    return display;
+}
+let tasks = loadToDo(list);
+let currentList = displayToDo(tasks);
 const readline = require('readline');
 const { toUnicode } = require('punycode');
 const interface = readline.createInterface({input: process.stdin, output: process.stdout});
-
-
 
 const menu = `
 Your options are:
@@ -32,24 +43,30 @@ const add = function(arr){
     newTask.push('uncomplete');
     tasks.push(newTask)
 }
-const remove = function(arr){
-    tasks.splice(Number(arr)-1,1)
+const remove = function(str){
+    tasks.splice(Number(str)-1,1)
 }
-const complete = function(arr){
-    tasks[Number(arr)-1][1]='complete';
+const complete = function(str){
+    tasks[Number(str)-1][1].push('complete');
 }
-const uncomplete = function(arr){
-    tasks[Number(arr)-1][1]='uncomplete';
+const uncomplete = function(str){
+    tasks[Number(str)-1][1]='uncomplete';
 }
 const handleMenu = function(str){
     if(str === '1'){interface.question(newOne,add(process.argv.slice(2)))}
-    else if(str ==='2'){interface.question(removeOne,remove(process.argv.slice(2)))}
-    else if(str ==='3'){interface.question(finish,complete(process.argv.slice(2)))}
-    else if(str ==='4'){interface.question(unfinished,uncomplete(process.argv.slice(2)))}
-    else {console.log('Are you quitting?');
+    else if(str ==='2'){interface.question(removeOne,remove(process.argv[2]))}
+    else if(str ==='3'){interface.question(finish,complete(process.argv[2]))}
+    else if(str ==='4'){interface.question(unfinished,uncomplete(process.argv[2]))}
+    else {console.log('Quitting!');
     interface.close();}
 }
-
+const saveToDo = function(arr){
+    const newArr = '';
+    for(const subArr of Arr){
+        subTodo = subArr.join(',')
+        newArr += subTodo +'\n'
+    }
+}
 interface.question(menu,handleMenu);
 
 
