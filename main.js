@@ -57,7 +57,6 @@ const removeOne = `Which task need to be removed?`
 const finish = `Congratulation, Which task has been done?`
 const unfinished = `Which task still needs more effort?`
 const add = function(arr){
-    arr.concat(process.argv.slice(2));
     const newTask = [];
     newTask.push(arr);
     newTask.push('uncomplete');
